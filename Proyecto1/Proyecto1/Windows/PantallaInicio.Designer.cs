@@ -32,58 +32,74 @@
             this.closeButton = new System.Windows.Forms.Button();
             this.crearButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // abrirButton
             // 
+            this.abrirButton.BackColor = System.Drawing.Color.Transparent;
+            this.abrirButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.abrirButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.abrirButton.Image = global::Proyecto1.Properties.Resources.importar;
             this.abrirButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.abrirButton.Location = new System.Drawing.Point(377, 172);
+            this.abrirButton.Location = new System.Drawing.Point(369, 198);
             this.abrirButton.Name = "abrirButton";
-            this.abrirButton.Size = new System.Drawing.Size(250, 150);
+            this.abrirButton.Size = new System.Drawing.Size(250, 173);
             this.abrirButton.TabIndex = 3;
             this.abrirButton.Text = "Abrir";
             this.abrirButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.abrirButton.UseVisualStyleBackColor = true;
+            this.abrirButton.UseVisualStyleBackColor = false;
+            this.abrirButton.Click += new System.EventHandler(this.abrirButton_Click);
             // 
             // closeButton
             // 
+            this.closeButton.BackColor = System.Drawing.Color.Transparent;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.closeButton.Image = global::Proyecto1.Properties.Resources.cerrar__1_;
             this.closeButton.Location = new System.Drawing.Point(595, 410);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(90, 90);
             this.closeButton.TabIndex = 2;
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.button3_Click);
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // crearButton
             // 
+            this.crearButton.BackColor = System.Drawing.Color.Transparent;
+            this.crearButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.crearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crearButton.Image = global::Proyecto1.Properties.Resources.crear;
             this.crearButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.crearButton.Location = new System.Drawing.Point(58, 172);
+            this.crearButton.Location = new System.Drawing.Point(56, 198);
             this.crearButton.Name = "crearButton";
-            this.crearButton.Size = new System.Drawing.Size(250, 150);
+            this.crearButton.Size = new System.Drawing.Size(250, 173);
             this.crearButton.TabIndex = 0;
             this.crearButton.Text = "Crear";
             this.crearButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.crearButton.UseVisualStyleBackColor = true;
+            this.crearButton.UseVisualStyleBackColor = false;
+            this.crearButton.Click += new System.EventHandler(this.crearButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(296, 89);
+            this.label1.Font = new System.Drawing.Font("MV Boli", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(142, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 17);
+            this.label1.Size = new System.Drawing.Size(390, 55);
             this.label1.TabIndex = 4;
-            this.label1.Text = "IDE GREEN";
+            this.label1.Text = "INNOVATION IDE";
+            // 
+            // openFile
+            // 
+            this.openFile.Filter = "Archivos de Proyecto(*.gt)|*.gt*";
             // 
             // PantallaInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 503);
+            this.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.ClientSize = new System.Drawing.Size(692, 503);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.abrirButton);
             this.Controls.Add(this.closeButton);
@@ -103,6 +119,7 @@
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button abrirButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.OpenFileDialog openFile;
     }
 }
 
