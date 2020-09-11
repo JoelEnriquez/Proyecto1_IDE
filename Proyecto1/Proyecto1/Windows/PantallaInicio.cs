@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto1.ObjetosCodigo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace Proyecto1
     public partial class PantallaInicio : Form
     {
         LeerGuardarProyecto leerGuardar = new LeerGuardarProyecto();
+        EditorCodigo editor;
         public PantallaInicio()
         {
             InitializeComponent();
@@ -25,7 +27,14 @@ namespace Proyecto1
 
         private void crearButton_Click(object sender, EventArgs e)
         {
-
+            
+            //Application.Run(new EditorCodigo(this,proyecto));
+            if (saveFile.ShowDialog()==DialogResult.OK)
+            {
+                String path = saveFile.FileName+".gt";
+                Proyecto proyecto = new Proyecto();
+                leerGuardar.guardarProyecto(path, proyecto);
+            }
         }
 
         private void abrirButton_Click(object sender, EventArgs e)
@@ -34,6 +43,9 @@ namespace Proyecto1
             {
                 String path = openFile.FileName;
                 leerGuardar.leerProyecto(path);
+                editor = new EditorCodigo(this);
+                editor.Show();
+                this.Close();               
             }
             
         }

@@ -19,19 +19,20 @@ namespace Proyecto1
                 using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
                     BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, proyecto); 
+                    bf.Serialize(fs, proyecto);
                 }   
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 MessageBox.Show("No se ha podido guardar el archivo","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
 
         public Proyecto leerProyecto(String path)
-        {
-            
+        {          
             try
             {
                 using (FileStream fs = new FileStream(path,FileMode.Open,FileAccess.Read))

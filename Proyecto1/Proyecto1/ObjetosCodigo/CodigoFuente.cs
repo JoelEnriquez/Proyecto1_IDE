@@ -6,7 +6,28 @@ using System.Threading.Tasks;
 
 namespace Proyecto1.ObjetosCodigo
 {
-    class Class1
+    
+    class CodigoFuente
     {
+        private String nombreCodigoFuente;
+        private String codigo;
+
+        public CodigoFuente(String nombreCodigoFuente)
+        {
+            this.nombreCodigoFuente = nombreCodigoFuente;
+        }
+
+        public void setCodigo(String codigo)
+        {
+            this.codigo = codigo;
+        }
+
+        public String getCodigo()
+        {
+            return codigo;
+        }
+
+
+
     }
 }

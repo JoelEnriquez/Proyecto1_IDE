@@ -33,6 +33,7 @@
             this.crearButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
+            this.saveFile = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // abrirButton
@@ -94,6 +95,10 @@
             // 
             this.openFile.Filter = "Archivos de Proyecto(*.gt)|*.gt*";
             // 
+            // saveFile
+            // 
+            this.saveFile.Filter = "Archivos de Proyecto(*.gt)|*.gt*";
+            // 
             // PantallaInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -120,6 +125,7 @@
         private System.Windows.Forms.Button abrirButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFile;
+        private System.Windows.Forms.SaveFileDialog saveFile;
     }
 }
 
