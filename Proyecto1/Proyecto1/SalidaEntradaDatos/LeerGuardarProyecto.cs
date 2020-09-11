@@ -24,8 +24,6 @@ namespace Proyecto1
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
                 MessageBox.Show("No se ha podido guardar el archivo","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
