@@ -27,13 +27,15 @@ namespace Proyecto1
 
         private void crearButton_Click(object sender, EventArgs e)
         {
-            
-            //Application.Run(new EditorCodigo(this,proyecto));
             if (saveFile.ShowDialog()==DialogResult.OK)
             {
-                String path = saveFile.FileName+".gt";
+                String path = saveFile.FileName+".gt"; //Asigna la extension de archivo al proyecto para crear el objeto
                 Proyecto proyecto = new Proyecto();
                 leerGuardar.guardarProyecto(path, proyecto);
+
+                editor = new EditorCodigo(this, proyecto,path,leerGuardar);
+                editor.Show();
+                this.Visible = false;
             }
         }
 
@@ -42,10 +44,10 @@ namespace Proyecto1
             if (openFile.ShowDialog() == DialogResult.OK)
             {
                 String path = openFile.FileName;
-                leerGuardar.leerProyecto(path);
-                editor = new EditorCodigo(this);
+                Proyecto proyecto = leerGuardar.leerProyecto(path);
+                editor = new EditorCodigo(this,proyecto,path,leerGuardar);
                 editor.Show();
-                this.Close();               
+                this.Visible = false;             
             }
             
         }

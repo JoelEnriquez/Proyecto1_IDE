@@ -16,7 +16,10 @@ namespace Proyecto1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PantallaInicio());
+
+            PantallaInicio pantalla = new PantallaInicio();
+            pantalla.Show();
+            Application.Run();
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Proyecto1.ObjetosCodigo
 {
     [Serializable]
-    class Proyecto
+    public class Proyecto
     {
         
         private ArrayList codigoFuentes;

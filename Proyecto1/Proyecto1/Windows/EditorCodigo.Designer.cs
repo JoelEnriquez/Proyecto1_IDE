@@ -28,82 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStripEditorCodigo = new System.Windows.Forms.MenuStrip();
+            this.pantallaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.volverMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verLaAyudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorCodigoRichText = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
+            this.abrirButton = new System.Windows.Forms.Button();
+            this.cerrarButton = new System.Windows.Forms.Button();
+            this.borrarButton = new System.Windows.Forms.Button();
+            this.crearButton = new System.Windows.Forms.Button();
+            this.codigoAbiertoCombo = new System.Windows.Forms.ComboBox();
+            this.txtNombreProyecto = new System.Windows.Forms.Label();
+            this.importarButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.salidaErroresRichText = new System.Windows.Forms.RichTextBox();
+            this.posicionTextBox = new System.Windows.Forms.TextBox();
+            this.nombreProyectoTextBox = new System.Windows.Forms.TextBox();
+            this.compilarButton = new System.Windows.Forms.Button();
+            this.openFile = new System.Windows.Forms.OpenFileDialog();
+            this.menuStripEditorCodigo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStripEditorCodigo
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStripEditorCodigo.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStripEditorCodigo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pantallaToolStripMenuItem,
             this.archivoToolStripMenuItem,
             this.ayudaToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1383, 28);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStripEditorCodigo.Location = new System.Drawing.Point(0, 0);
+            this.menuStripEditorCodigo.Name = "menuStripEditorCodigo";
+            this.menuStripEditorCodigo.Size = new System.Drawing.Size(1383, 30);
+            this.menuStripEditorCodigo.TabIndex = 0;
+            this.menuStripEditorCodigo.Text = "menuStrip1";
+            // 
+            // pantallaToolStripMenuItem
+            // 
+            this.pantallaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirToolStripMenuItem,
+            this.volverMenuToolStripMenuItem});
+            this.pantallaToolStripMenuItem.Name = "pantallaToolStripMenuItem";
+            this.pantallaToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.pantallaToolStripMenuItem.Text = "Pantalla";
+            this.pantallaToolStripMenuItem.Click += new System.EventHandler(this.pantallaToolStripMenuItem_Click);
+            // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.abrirToolStripMenuItem.Text = "Abrir proyecto";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            // 
+            // volverMenuToolStripMenuItem
+            // 
+            this.volverMenuToolStripMenuItem.Name = "volverMenuToolStripMenuItem";
+            this.volverMenuToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.volverMenuToolStripMenuItem.Text = "Volver al Menu";
+            this.volverMenuToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem1_Click);
             // 
             // archivoToolStripMenuItem
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.guardarToolStripMenuItem1,
             this.cerrarToolStripMenuItem,
-            this.guardarToolStripMenuItem,
-            this.eliminarToolStripMenuItem,
-            this.salirToolStripMenuItem});
+            this.eliminarToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
-            this.archivoToolStripMenuItem.Text = "Archivo";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.archivoToolStripMenuItem.Text = "Proyecto";
+            this.archivoToolStripMenuItem.Click += new System.EventHandler(this.archivoToolStripMenuItem_Click);
             // 
             // guardarToolStripMenuItem1
             // 
             this.guardarToolStripMenuItem1.Name = "guardarToolStripMenuItem1";
-            this.guardarToolStripMenuItem1.Size = new System.Drawing.Size(146, 26);
+            this.guardarToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.guardarToolStripMenuItem1.Text = "Guardar";
+            this.guardarToolStripMenuItem1.Click += new System.EventHandler(this.guardarToolStripMenuItem1_Click);
             // 
             // cerrarToolStripMenuItem
             // 
             this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
-            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.cerrarToolStripMenuItem.Text = "Cerrar";
-            // 
-            // guardarToolStripMenuItem
-            // 
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
-            this.guardarToolStripMenuItem.Text = "Abir";
-            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
+            this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -116,7 +138,7 @@
             // verLaAyudaToolStripMenuItem
             // 
             this.verLaAyudaToolStripMenuItem.Name = "verLaAyudaToolStripMenuItem";
-            this.verLaAyudaToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
+            this.verLaAyudaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.verLaAyudaToolStripMenuItem.Text = "Ver la ayuda";
             // 
             // editorCodigoRichText
@@ -125,7 +147,7 @@
             this.editorCodigoRichText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editorCodigoRichText.Location = new System.Drawing.Point(24, 77);
             this.editorCodigoRichText.Name = "editorCodigoRichText";
-            this.editorCodigoRichText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.editorCodigoRichText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.editorCodigoRichText.Size = new System.Drawing.Size(1004, 470);
             this.editorCodigoRichText.TabIndex = 1;
             this.editorCodigoRichText.Text = "";
@@ -134,11 +156,11 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.abrirButton);
+            this.panel1.Controls.Add(this.cerrarButton);
+            this.panel1.Controls.Add(this.borrarButton);
+            this.panel1.Controls.Add(this.crearButton);
+            this.panel1.Controls.Add(this.codigoAbiertoCombo);
             this.panel1.Location = new System.Drawing.Point(1059, 77);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(284, 470);
@@ -155,70 +177,79 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Archivos Codigo Abiertos";
             // 
-            // button4
+            // abrirButton
             // 
-            this.button4.Location = new System.Drawing.Point(92, 369);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 59);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Abrir";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.abrirButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.abrirButton.Location = new System.Drawing.Point(92, 373);
+            this.abrirButton.Name = "abrirButton";
+            this.abrirButton.Size = new System.Drawing.Size(104, 59);
+            this.abrirButton.TabIndex = 4;
+            this.abrirButton.Text = "Abrir";
+            this.abrirButton.UseVisualStyleBackColor = true;
+            this.abrirButton.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button3
+            // cerrarButton
             // 
-            this.button3.Location = new System.Drawing.Point(92, 293);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 58);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Cerrar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.cerrarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cerrarButton.Location = new System.Drawing.Point(92, 215);
+            this.cerrarButton.Name = "cerrarButton";
+            this.cerrarButton.Size = new System.Drawing.Size(104, 58);
+            this.cerrarButton.TabIndex = 3;
+            this.cerrarButton.Text = "Cerrar";
+            this.cerrarButton.UseVisualStyleBackColor = true;
+            this.cerrarButton.Click += new System.EventHandler(this.cerrarButton_Click);
             // 
-            // button2
+            // borrarButton
             // 
-            this.button2.Location = new System.Drawing.Point(92, 211);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 62);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Borrar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.borrarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.borrarButton.Location = new System.Drawing.Point(92, 290);
+            this.borrarButton.Name = "borrarButton";
+            this.borrarButton.Size = new System.Drawing.Size(104, 62);
+            this.borrarButton.TabIndex = 2;
+            this.borrarButton.Text = "Borrar";
+            this.borrarButton.UseVisualStyleBackColor = true;
+            this.borrarButton.Click += new System.EventHandler(this.borrarButton_Click);
             // 
-            // button1
+            // crearButton
             // 
-            this.button1.Location = new System.Drawing.Point(92, 132);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 60);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Crear";
-            this.button1.UseVisualStyleBackColor = true;
+            this.crearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crearButton.Location = new System.Drawing.Point(92, 132);
+            this.crearButton.Name = "crearButton";
+            this.crearButton.Size = new System.Drawing.Size(104, 60);
+            this.crearButton.TabIndex = 1;
+            this.crearButton.Text = "Crear";
+            this.crearButton.UseVisualStyleBackColor = true;
+            this.crearButton.Click += new System.EventHandler(this.crearButton_Click);
             // 
-            // comboBox1
+            // codigoAbiertoCombo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(30, 80);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(228, 24);
-            this.comboBox1.TabIndex = 0;
+            this.codigoAbiertoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.codigoAbiertoCombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codigoAbiertoCombo.FormattingEnabled = true;
+            this.codigoAbiertoCombo.Location = new System.Drawing.Point(30, 77);
+            this.codigoAbiertoCombo.Name = "codigoAbiertoCombo";
+            this.codigoAbiertoCombo.Size = new System.Drawing.Size(228, 33);
+            this.codigoAbiertoCombo.TabIndex = 0;
             // 
-            // label5
+            // txtNombreProyecto
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(19, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(208, 29);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Nombre Proyecto:";
+            this.txtNombreProyecto.AutoSize = true;
+            this.txtNombreProyecto.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombreProyecto.Location = new System.Drawing.Point(19, 45);
+            this.txtNombreProyecto.Name = "txtNombreProyecto";
+            this.txtNombreProyecto.Size = new System.Drawing.Size(208, 29);
+            this.txtNombreProyecto.TabIndex = 9;
+            this.txtNombreProyecto.Text = "Nombre Proyecto:";
             // 
-            // button5
+            // importarButton
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(1131, 714);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(141, 62);
-            this.button5.TabIndex = 12;
-            this.button5.Text = "Importar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.importarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.importarButton.Location = new System.Drawing.Point(1131, 714);
+            this.importarButton.Name = "importarButton";
+            this.importarButton.Size = new System.Drawing.Size(141, 62);
+            this.importarButton.TabIndex = 12;
+            this.importarButton.Text = "Importar";
+            this.importarButton.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -230,68 +261,72 @@
             this.label8.TabIndex = 13;
             this.label8.Text = "Posicion:";
             // 
-            // richTextBox2
+            // salidaErroresRichText
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(24, 618);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(1004, 158);
-            this.richTextBox2.TabIndex = 14;
-            this.richTextBox2.Text = "";
+            this.salidaErroresRichText.Location = new System.Drawing.Point(24, 618);
+            this.salidaErroresRichText.Name = "salidaErroresRichText";
+            this.salidaErroresRichText.Size = new System.Drawing.Size(1004, 158);
+            this.salidaErroresRichText.TabIndex = 14;
+            this.salidaErroresRichText.Text = "";
             // 
-            // textBox1
+            // posicionTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(191, 568);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(282, 22);
-            this.textBox1.TabIndex = 15;
+            this.posicionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.posicionTextBox.Location = new System.Drawing.Point(182, 561);
+            this.posicionTextBox.Name = "posicionTextBox";
+            this.posicionTextBox.ReadOnly = true;
+            this.posicionTextBox.Size = new System.Drawing.Size(282, 30);
+            this.posicionTextBox.TabIndex = 15;
+            this.posicionTextBox.Text = "Fila:1 Columna:1";
+            this.posicionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox2
+            // nombreProyectoTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(279, 49);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(610, 22);
-            this.textBox2.TabIndex = 16;
+            this.nombreProyectoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nombreProyectoTextBox.Location = new System.Drawing.Point(281, 45);
+            this.nombreProyectoTextBox.Name = "nombreProyectoTextBox";
+            this.nombreProyectoTextBox.ReadOnly = true;
+            this.nombreProyectoTextBox.Size = new System.Drawing.Size(610, 30);
+            this.nombreProyectoTextBox.TabIndex = 16;
+            this.nombreProyectoTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button6
+            // compilarButton
             // 
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(1131, 618);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(141, 62);
-            this.button6.TabIndex = 17;
-            this.button6.Text = "Compilar";
-            this.button6.UseVisualStyleBackColor = true;
+            this.compilarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compilarButton.Location = new System.Drawing.Point(1131, 618);
+            this.compilarButton.Name = "compilarButton";
+            this.compilarButton.Size = new System.Drawing.Size(141, 62);
+            this.compilarButton.TabIndex = 17;
+            this.compilarButton.Text = "Compilar";
+            this.compilarButton.UseVisualStyleBackColor = true;
             // 
-            // salirToolStripMenuItem
+            // openFile
             // 
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            this.openFile.Filter = "Archivos de Proyecto(*.gt)|*.gt*";
             // 
             // EditorCodigo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1383, 802);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.compilarButton);
+            this.Controls.Add(this.nombreProyectoTextBox);
+            this.Controls.Add(this.posicionTextBox);
+            this.Controls.Add(this.salidaErroresRichText);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.importarButton);
+            this.Controls.Add(this.txtNombreProyecto);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.editorCodigoRichText);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStripEditorCodigo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStripEditorCodigo;
             this.Name = "EditorCodigo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Editor Codigo";
             this.Load += new System.EventHandler(this.EditorCodigo_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStripEditorCodigo.ResumeLayout(false);
+            this.menuStripEditorCodigo.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -301,9 +336,8 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStripEditorCodigo;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
@@ -311,19 +345,22 @@
         private System.Windows.Forms.RichTextBox editorCodigoRichText;
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label txtNombreProyecto;
+        private System.Windows.Forms.Button abrirButton;
+        private System.Windows.Forms.Button cerrarButton;
+        private System.Windows.Forms.Button borrarButton;
+        private System.Windows.Forms.Button crearButton;
+        private System.Windows.Forms.ComboBox codigoAbiertoCombo;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button importarButton;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox salidaErroresRichText;
+        private System.Windows.Forms.TextBox posicionTextBox;
+        private System.Windows.Forms.TextBox nombreProyectoTextBox;
+        private System.Windows.Forms.Button compilarButton;
+        private System.Windows.Forms.ToolStripMenuItem pantallaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem volverMenuToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFile;
     }
 }

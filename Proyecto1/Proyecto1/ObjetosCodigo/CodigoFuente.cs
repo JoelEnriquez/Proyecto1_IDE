@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Proyecto1.ObjetosCodigo
 {
-    
-    class CodigoFuente
+    [Serializable]
+    public class CodigoFuente
     {
         private String nombreCodigoFuente;
         private String codigo;
@@ -25,6 +25,11 @@ namespace Proyecto1.ObjetosCodigo
         public String getCodigo()
         {
             return codigo;
+        }
+
+        public String getNombreCodigo()
+        {
+            return nombreCodigoFuente;
         }
 
 

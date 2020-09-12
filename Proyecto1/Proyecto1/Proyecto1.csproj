@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,8 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logica\AnalizadorLexico.cs" />
     <Compile Include="ObjetosCodigo\CodigoFuente.cs" />
     <Compile Include="ObjetosCodigo\Proyecto.cs" />
+    <Compile Include="Windows\AbrirBorrarCodigo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\AbrirBorrarCodigo.Designer.cs">
+      <DependentUpon>AbrirBorrarCodigo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditorCodigo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +72,9 @@
     </Compile>
     <Compile Include="Main\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Windows\AbrirBorrarCodigo.resx">
+      <DependentUpon>AbrirBorrarCodigo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\EditorCodigo.resx">
       <DependentUpon>EditorCodigo.cs</DependentUpon>
     </EmbeddedResource>

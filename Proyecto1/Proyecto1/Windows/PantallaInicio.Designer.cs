@@ -31,7 +31,7 @@
             this.abrirButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.crearButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txtINNOVATION_IDE = new System.Windows.Forms.Label();
             this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.saveFile = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
@@ -80,16 +80,16 @@
             this.crearButton.UseVisualStyleBackColor = false;
             this.crearButton.Click += new System.EventHandler(this.crearButton_Click);
             // 
-            // label1
+            // txtINNOVATION_IDE
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MV Boli", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(142, 87);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(390, 55);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "INNOVATION IDE";
+            this.txtINNOVATION_IDE.AutoSize = true;
+            this.txtINNOVATION_IDE.Font = new System.Drawing.Font("MV Boli", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtINNOVATION_IDE.ForeColor = System.Drawing.Color.Black;
+            this.txtINNOVATION_IDE.Location = new System.Drawing.Point(142, 87);
+            this.txtINNOVATION_IDE.Name = "txtINNOVATION_IDE";
+            this.txtINNOVATION_IDE.Size = new System.Drawing.Size(390, 55);
+            this.txtINNOVATION_IDE.TabIndex = 4;
+            this.txtINNOVATION_IDE.Text = "INNOVATION IDE";
             // 
             // openFile
             // 
@@ -105,7 +105,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGoldenrod;
             this.ClientSize = new System.Drawing.Size(692, 503);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtINNOVATION_IDE);
             this.Controls.Add(this.abrirButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.crearButton);
@@ -123,7 +123,7 @@
         private System.Windows.Forms.Button crearButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button abrirButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label txtINNOVATION_IDE;
         private System.Windows.Forms.OpenFileDialog openFile;
         private System.Windows.Forms.SaveFileDialog saveFile;
     }

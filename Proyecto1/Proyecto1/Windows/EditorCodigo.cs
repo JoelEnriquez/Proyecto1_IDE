@@ -1,4 +1,6 @@
-﻿using Proyecto1.ObjetosCodigo;
+﻿using Microsoft.VisualBasic;
+using Proyecto1.ObjetosCodigo;
+using Proyecto1.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,22 +9,80 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Proyecto1
 {
     public partial class EditorCodigo : Form
     {
-        private Boolean codigoGuardado = false;
+        private Boolean codigoGuardado = true;
         private Proyecto proyecto;
+        private String rutaProyecto;
         private PantallaInicio inicio;
+        private LeerGuardarProyecto leerGuardar;
+        private AbrirBorrarCodigo abrirBorrar;
 
-        public EditorCodigo(PantallaInicio inicio)
+        public EditorCodigo(PantallaInicio inicio, Proyecto proyecto, String rutaProyecto, LeerGuardarProyecto leerGuardar)
         {
-            InitializeComponent();
             this.inicio = inicio;
+            this.proyecto = proyecto;
+            this.rutaProyecto = rutaProyecto;
+            this.leerGuardar = leerGuardar;
+            InitializeComponent();
+            setearComponentes(); //Este se da cuando se ejecuta la primera vez la ventana
+        }
+
+        private void setearComponentes()
+        {
+            setearNombreProyectoTextBox();
+            editorCodigoRichText.ReadOnly = true;
+            salidaErroresRichText.ReadOnly = true;
+        }
+
+        private void reSetearComponentes()
+        {
+            setearNombreProyectoTextBox();
+            limpiarComponentes();
+        }
+
+        private void anularComponentes()
+        {
+            limpiarComponentes();
+
+            //Anulamos los componentes del proyecto actual
+            rutaProyecto = "";
+            nombreProyectoTextBox.Text = rutaProyecto;
+            proyecto = null;
+        }
+
+        private void limpiarComponentes()
+        {
+            codigoAbiertoCombo.Items.Clear();
+            editorCodigoRichText.Text = "";
+            salidaErroresRichText.Text = "";
+            editorCodigoRichText.ReadOnly = true;
+            salidaErroresRichText.ReadOnly = true;
+            codigoGuardado = true;
+        }
+
+        private void setearNombreProyectoTextBox()
+        {
+            String[] separadorRuta = rutaProyecto.Split('\\');
+            int posicionNombreProyecto = separadorRuta.Length - 1;
+            nombreProyectoTextBox.Text = separadorRuta[posicionNombreProyecto];
+        }
+
+        private void setearCodigo()
+        {
+            editorCodigoRichText.ReadOnly = false;
+
+            //String codigo = (CodigoFuente)proyecto.getCodigoFuentes();
+            //editorCodigoRichText.Text
         }
 
         public void getPositionCurse()
@@ -47,7 +107,7 @@ namespace Proyecto1
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -72,26 +132,234 @@ namespace Proyecto1
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!codigoGuardado)
+            if (proyecto!=null)
             {
-                DialogResult result = MessageBox.Show("No se ha guardado el proyecto. ¿Deseas guardarlo?","Alerta",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
-                if (result==DialogResult.Yes)
+                if (codigoAbiertoCombo.Items.Count < proyecto.getCodigoFuentes().Count)
                 {
+                    abrirBorrar = new AbrirBorrarCodigo(this, proyecto, "Abrir");
+                    abrirBorrar.ShowDialog(this);
 
+                    codigoAbiertoCombo.Items.Add(abrirBorrar.nombreAgregadoEliminado());
+                    codigoAbiertoCombo.SelectedItem = abrirBorrar.nombreAgregadoEliminado();
                 }
-
+                else
+                {
+                    MessageBox.Show("Ya se han abierto todos los archivos de codigo del proyecto", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
-                this.Close();
-                inicio.Show();
+                MessageBox.Show("No hay proyecto cargado", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+            
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!codigoGuardado)
+            {
+                preguntarGuardarProyecto();
+            }
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                rutaProyecto = openFile.FileName;
+                proyecto = leerGuardar.leerProyecto(rutaProyecto);
+                reSetearComponentes(); //Se vuelven a pintar los componentes con el archivo que se habra                   
             }
 
         }
+
+        /// <summary>
+        /// Sirve para cerrar la ventana antes preguntando si quiere guardar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cerrarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (!codigoGuardado)
+            {
+                preguntarGuardarProyecto();
+            }
+
+            inicio.Visible = true;
+            this.Close();
+        }
+
+        private void preguntarGuardarProyecto()
+        {
+            DialogResult result = MessageBox.Show("No se ha guardado el proyecto. ¿Deseas guardarlo?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                codigoGuardado = true;
+                leerGuardar.guardarProyecto(rutaProyecto, proyecto);
+            }
+
+        }
+
+        /// <summary>
+        /// Este metodo sirve para cerrar un proyecto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!codigoGuardado)
+            {
+                preguntarGuardarProyecto();
+            }
+
+            anularComponentes();
+        }
+
+        private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
+
+
+        private void guardarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            codigoGuardado = true;
+            leerGuardar.guardarProyecto(rutaProyecto, proyecto);
+        }
+
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (proyecto != null)
+            {
+                DialogResult result = MessageBox.Show("¿Seguro que desea eliminar el proyecto actual?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    leerGuardar.eliminarProyecto(rutaProyecto);
+                    anularComponentes();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay proyecto para eliminar", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void textChangedEventHandler(object sender, TextChangedEventArgs args)
+        {
+
+        }
+
+        private void crearButton_Click(object sender, EventArgs e)
+        {
+            String nombreCodigo = Interaction.InputBox("Ingrese nombre del Codigo Fuente:", "Nombre Codigo Fuente", "").Trim();
+            if (nombreCodigo.Equals(""))
+            {
+                MessageBox.Show("No se ha escrito ningun nombre para el nombre codigo", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                if (repeticionNombreCodigo(nombreCodigo))
+                {
+                    MessageBox.Show("Ya existe dicho nombre","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+                else
+                {
+                    CodigoFuente codigoFuente = new CodigoFuente(nombreCodigo);
+                    proyecto.agregarCodigoFuente(codigoFuente);
+
+                    codigoAbiertoCombo.Items.Add(codigoFuente.getNombreCodigo());
+                    codigoAbiertoCombo.SelectedItem = nombreCodigo;
+                    codigoGuardado = false;
+                }              
+            }
+        }
+
+        /// <summary>
+        /// Busca entre el arraylist de proyecto para ver si coincide el nombre y ver si no se repite
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+        private Boolean repeticionNombreCodigo(String nombre)
+        {
+            for (int i = 0; i < proyecto.getCodigoFuentes().Count; i++)
+            {
+                if (((CodigoFuente)proyecto.getCodigoFuentes()[i]).getNombreCodigo().Equals(nombre))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void pantallaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cerrarButton_Click(object sender, EventArgs e)
+        {
+            if (codigoAbiertoCombo.Items.Count==0)
+            {
+                MessageBox.Show("No hay elementos para cerrar","Atencion",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+            else
+            {
+                codigoAbiertoCombo.Items.RemoveAt(codigoAbiertoCombo.SelectedIndex);
+                if (codigoAbiertoCombo.Items.Count>0)
+                {
+                    codigoAbiertoCombo.SelectedIndex = 0;
+                }
+                else
+                {
+                    codigoAbiertoCombo.Refresh();
+                }              
+            }
+        }
+
+        private void borrarButton_Click(object sender, EventArgs e)
+        {
+            if (proyecto!=null)
+            {
+                if (proyecto.getCodigoFuentes().Count>0)
+                {
+                    abrirBorrar = new AbrirBorrarCodigo(this, proyecto, "Borrar");
+                    abrirBorrar.ShowDialog(this);
+
+                    codigoAbiertoCombo.Items.Remove(abrirBorrar.nombreAgregadoEliminado());
+                    if (codigoAbiertoCombo.Items.Count>0)
+                    {
+                        codigoAbiertoCombo.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        codigoAbiertoCombo.Refresh();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No hay archivos codigo para eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("No hay proyecto cargado", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+        }
+
+
+        public System.Windows.Forms.ComboBox getComboCodigosAbiertos()
+        {
+            return codigoAbiertoCombo;
+        }
+
+        public void setComboCodigoFuentesAbierto(System.Windows.Forms.ComboBox comboCodigos)
+        {
+            this.codigoAbiertoCombo = comboCodigos;
+        }
+
+        
     }
 }

@@ -10,7 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Proyecto1
 {
-    class LeerGuardarProyecto
+    public class LeerGuardarProyecto
     {
         public void guardarProyecto(String path, Proyecto proyecto)
         {
