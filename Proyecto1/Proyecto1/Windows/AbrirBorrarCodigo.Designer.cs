@@ -35,10 +35,10 @@
             // 
             // agregarEliminarButton
             // 
-            this.agregarEliminarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.agregarEliminarButton.Location = new System.Drawing.Point(110, 221);
+            this.agregarEliminarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.agregarEliminarButton.Location = new System.Drawing.Point(135, 220);
             this.agregarEliminarButton.Name = "agregarEliminarButton";
-            this.agregarEliminarButton.Size = new System.Drawing.Size(227, 71);
+            this.agregarEliminarButton.Size = new System.Drawing.Size(181, 60);
             this.agregarEliminarButton.TabIndex = 0;
             this.agregarEliminarButton.Text = "button1";
             this.agregarEliminarButton.UseVisualStyleBackColor = true;
@@ -47,11 +47,11 @@
             // codigoComboBox
             // 
             this.codigoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.codigoComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codigoComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codigoComboBox.FormattingEnabled = true;
             this.codigoComboBox.Location = new System.Drawing.Point(110, 127);
             this.codigoComboBox.Name = "codigoComboBox";
-            this.codigoComboBox.Size = new System.Drawing.Size(227, 59);
+            this.codigoComboBox.Size = new System.Drawing.Size(227, 44);
             this.codigoComboBox.TabIndex = 1;
             // 
             // txtNombreCodi

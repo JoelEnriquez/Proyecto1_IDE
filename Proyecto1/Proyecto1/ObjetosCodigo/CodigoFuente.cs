@@ -15,6 +15,7 @@ namespace Proyecto1.ObjetosCodigo
         public CodigoFuente(String nombreCodigoFuente)
         {
             this.nombreCodigoFuente = nombreCodigoFuente;
+            codigo = "";
         }
 
         public void setCodigo(String codigo)

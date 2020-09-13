@@ -23,9 +23,32 @@ namespace Proyecto1.ObjetosCodigo
             codigoFuentes.Add(codigo);
         }
 
-        public void eliminarCodigoFuente()
+        /// <summary>
+        /// Busca el nombre de codigo y devulve su contenido
+        /// </summary>
+        /// <param name="nombreCodigo"></param>
+        /// <returns></returns>
+        public String devolverCodigoFuente(String nombreCodigo)
         {
+            for (int i = 0; i < codigoFuentes.Count; i++)
+            {
+                if (((CodigoFuente)codigoFuentes[i]).getNombreCodigo().Equals(nombreCodigo))
+                {
+                    return ((CodigoFuente)codigoFuentes[i]).getCodigo();
+                }
+            }
+            return "";
+        }
 
+        public void setearCodigo(String nombreCodigo, String codigo)
+        {
+            for (int i = 0; i < codigoFuentes.Count; i++)
+            {
+                if (((CodigoFuente)codigoFuentes[i]).getNombreCodigo().Equals(nombreCodigo))
+                {
+                    ((CodigoFuente)codigoFuentes[i]).setCodigo(codigo);
+                }
+            }
         }
         
         public ArrayList getCodigoFuentes()

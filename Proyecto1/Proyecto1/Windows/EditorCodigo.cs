@@ -35,6 +35,7 @@ namespace Proyecto1
             this.leerGuardar = leerGuardar;
             InitializeComponent();
             setearComponentes(); //Este se da cuando se ejecuta la primera vez la ventana
+            agregarEventos();//Se agregan eventos a los componentes
         }
 
         private void setearComponentes()
@@ -64,10 +65,10 @@ namespace Proyecto1
         {
             codigoAbiertoCombo.Items.Clear();
             editorCodigoRichText.Text = "";
+            editorCodigoRichText.BackColor = Color.Silver;
             salidaErroresRichText.Text = "";
             editorCodigoRichText.ReadOnly = true;
             salidaErroresRichText.ReadOnly = true;
-            codigoGuardado = true;
         }
 
         private void setearNombreProyectoTextBox()
@@ -77,12 +78,21 @@ namespace Proyecto1
             nombreProyectoTextBox.Text = separadorRuta[posicionNombreProyecto];
         }
 
+        private void agregarEventos()
+        {
+            codigoAbiertoCombo.SelectedIndexChanged += new System.EventHandler(ComboCodigoAbierto_SelectedItemChanged);
+            editorCodigoRichText.SelectionChanged += new EventHandler(editorRichTextBox_SelectionChanged);
+        }
+
+
+
         private void setearCodigo()
         {
             editorCodigoRichText.ReadOnly = false;
+            editorCodigoRichText.BackColor = Color.White;
 
-            //String codigo = (CodigoFuente)proyecto.getCodigoFuentes();
-            //editorCodigoRichText.Text
+            String codigo = proyecto.devolverCodigoFuente(codigoAbiertoCombo.Text);
+            editorCodigoRichText.Text = codigo;
         }
 
         public void getPositionCurse()
@@ -132,7 +142,7 @@ namespace Proyecto1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (proyecto!=null)
+            if (proyecto != null)
             {
                 if (codigoAbiertoCombo.Items.Count < proyecto.getCodigoFuentes().Count)
                 {
@@ -141,6 +151,7 @@ namespace Proyecto1
 
                     codigoAbiertoCombo.Items.Add(abrirBorrar.nombreAgregadoEliminado());
                     codigoAbiertoCombo.SelectedItem = abrirBorrar.nombreAgregadoEliminado();
+                    setearCodigo();
                 }
                 else
                 {
@@ -151,8 +162,8 @@ namespace Proyecto1
             {
                 MessageBox.Show("No hay proyecto cargado", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
-            
+
+
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -166,7 +177,8 @@ namespace Proyecto1
             {
                 rutaProyecto = openFile.FileName;
                 proyecto = leerGuardar.leerProyecto(rutaProyecto);
-                reSetearComponentes(); //Se vuelven a pintar los componentes con el archivo que se habra                   
+                reSetearComponentes(); //Se vuelven a pintar los componentes con el archivo que se habra   
+                codigoGuardado = true;
             }
 
         }
@@ -211,6 +223,7 @@ namespace Proyecto1
             }
 
             anularComponentes();
+            codigoGuardado = true;
         }
 
         private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -218,7 +231,7 @@ namespace Proyecto1
 
         }
 
-        
+
 
 
 
@@ -237,6 +250,7 @@ namespace Proyecto1
                 {
                     leerGuardar.eliminarProyecto(rutaProyecto);
                     anularComponentes();
+                    codigoGuardado = true;
                 }
             }
             else
@@ -261,7 +275,7 @@ namespace Proyecto1
             {
                 if (repeticionNombreCodigo(nombreCodigo))
                 {
-                    MessageBox.Show("Ya existe dicho nombre","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("Ya existe dicho nombre", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -271,7 +285,9 @@ namespace Proyecto1
                     codigoAbiertoCombo.Items.Add(codigoFuente.getNombreCodigo());
                     codigoAbiertoCombo.SelectedItem = nombreCodigo;
                     codigoGuardado = false;
-                }              
+
+                    setearCodigo();
+                }
             }
         }
 
@@ -299,54 +315,60 @@ namespace Proyecto1
 
         private void cerrarButton_Click(object sender, EventArgs e)
         {
-            if (codigoAbiertoCombo.Items.Count==0)
+            if (codigoAbiertoCombo.Items.Count == 0)
             {
-                MessageBox.Show("No hay elementos para cerrar","Atencion",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("No hay elementos para cerrar", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 codigoAbiertoCombo.Items.RemoveAt(codigoAbiertoCombo.SelectedIndex);
-                if (codigoAbiertoCombo.Items.Count>0)
+                if (codigoAbiertoCombo.Items.Count > 0)
                 {
                     codigoAbiertoCombo.SelectedIndex = 0;
+                    setearCodigo();
                 }
                 else
                 {
                     codigoAbiertoCombo.Refresh();
-                }              
+                    limpiarComponentes();
+                    codigoGuardado = true;
+                }
             }
         }
 
         private void borrarButton_Click(object sender, EventArgs e)
         {
-            if (proyecto!=null)
+            if (proyecto != null)
             {
-                if (proyecto.getCodigoFuentes().Count>0)
+                if (proyecto.getCodigoFuentes().Count > 0)
                 {
                     abrirBorrar = new AbrirBorrarCodigo(this, proyecto, "Borrar");
                     abrirBorrar.ShowDialog(this);
 
                     codigoAbiertoCombo.Items.Remove(abrirBorrar.nombreAgregadoEliminado());
-                    if (codigoAbiertoCombo.Items.Count>0)
+                    if (codigoAbiertoCombo.Items.Count > 0)
                     {
                         codigoAbiertoCombo.SelectedIndex = 0;
+                        setearCodigo();
                     }
                     else
                     {
                         codigoAbiertoCombo.Refresh();
+                        limpiarComponentes();
+                        codigoGuardado = true;
                     }
                 }
                 else
                 {
                     MessageBox.Show("No hay archivos codigo para eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
             else
             {
                 MessageBox.Show("No hay proyecto cargado", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
+
         }
 
 
@@ -360,6 +382,24 @@ namespace Proyecto1
             this.codigoAbiertoCombo = comboCodigos;
         }
 
-        
+        private void ComboCodigoAbierto_SelectedItemChanged(Object sender, System.EventArgs e)
+        {
+            setearCodigo();
+        }
+
+        private void editorCodigoRichText_TextChanged(object sender, EventArgs e)
+        {
+            proyecto.setearCodigo(codigoAbiertoCombo.Text, editorCodigoRichText.Text);
+        }
+
+        private void editorRichTextBox_SelectionChanged(object sender, System.EventArgs e)
+        {
+
+            int inicio = editorCodigoRichText.SelectionStart;
+            int fila = editorCodigoRichText.GetLineFromCharIndex(inicio)+1;
+            int columna = inicio - editorCodigoRichText.GetFirstCharIndexOfCurrentLine()+1;
+
+            posicionTextBox.Text = "Fila:"+fila+ " Columna:" +columna;
+        }
     }
 }

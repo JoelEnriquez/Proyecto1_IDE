@@ -67,7 +67,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStripEditorCodigo.Location = new System.Drawing.Point(0, 0);
             this.menuStripEditorCodigo.Name = "menuStripEditorCodigo";
-            this.menuStripEditorCodigo.Size = new System.Drawing.Size(1383, 30);
+            this.menuStripEditorCodigo.Size = new System.Drawing.Size(1383, 28);
             this.menuStripEditorCodigo.TabIndex = 0;
             this.menuStripEditorCodigo.Text = "menuStrip1";
             // 
@@ -84,14 +84,14 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.abrirToolStripMenuItem.Text = "Abrir proyecto";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // volverMenuToolStripMenuItem
             // 
             this.volverMenuToolStripMenuItem.Name = "volverMenuToolStripMenuItem";
-            this.volverMenuToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.volverMenuToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.volverMenuToolStripMenuItem.Text = "Volver al Menu";
             this.volverMenuToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem1_Click);
             // 
@@ -109,21 +109,21 @@
             // guardarToolStripMenuItem1
             // 
             this.guardarToolStripMenuItem1.Name = "guardarToolStripMenuItem1";
-            this.guardarToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.guardarToolStripMenuItem1.Size = new System.Drawing.Size(146, 26);
             this.guardarToolStripMenuItem1.Text = "Guardar";
             this.guardarToolStripMenuItem1.Click += new System.EventHandler(this.guardarToolStripMenuItem1_Click);
             // 
             // cerrarToolStripMenuItem
             // 
             this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
-            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(146, 26);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
@@ -138,20 +138,23 @@
             // verLaAyudaToolStripMenuItem
             // 
             this.verLaAyudaToolStripMenuItem.Name = "verLaAyudaToolStripMenuItem";
-            this.verLaAyudaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.verLaAyudaToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.verLaAyudaToolStripMenuItem.Text = "Ver la ayuda";
             // 
             // editorCodigoRichText
             // 
             this.editorCodigoRichText.AcceptsTab = true;
-            this.editorCodigoRichText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editorCodigoRichText.BackColor = System.Drawing.Color.Silver;
+            this.editorCodigoRichText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editorCodigoRichText.Location = new System.Drawing.Point(24, 77);
             this.editorCodigoRichText.Name = "editorCodigoRichText";
             this.editorCodigoRichText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.editorCodigoRichText.Size = new System.Drawing.Size(1004, 470);
             this.editorCodigoRichText.TabIndex = 1;
             this.editorCodigoRichText.Text = "";
+            this.editorCodigoRichText.WordWrap = false;
             this.editorCodigoRichText.CursorChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.editorCodigoRichText.TextChanged += new System.EventHandler(this.editorCodigoRichText_TextChanged);
             // 
             // panel1
             // 
@@ -263,8 +266,10 @@
             // 
             // salidaErroresRichText
             // 
+            this.salidaErroresRichText.BackColor = System.Drawing.Color.Silver;
             this.salidaErroresRichText.Location = new System.Drawing.Point(24, 618);
             this.salidaErroresRichText.Name = "salidaErroresRichText";
+            this.salidaErroresRichText.ReadOnly = true;
             this.salidaErroresRichText.Size = new System.Drawing.Size(1004, 158);
             this.salidaErroresRichText.TabIndex = 14;
             this.salidaErroresRichText.Text = "";
