@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using Proyecto1.Logica;
 using Proyecto1.ObjetosCodigo;
 using Proyecto1.Windows;
 using System;
@@ -26,6 +27,7 @@ namespace Proyecto1
         private PantallaInicio inicio;
         private LeerGuardarProyecto leerGuardar;
         private AbrirBorrarCodigo abrirBorrar;
+        private ManejadorCodigo manejador;
 
         public EditorCodigo(PantallaInicio inicio, Proyecto proyecto, String rutaProyecto, LeerGuardarProyecto leerGuardar)
         {
@@ -33,6 +35,7 @@ namespace Proyecto1
             this.proyecto = proyecto;
             this.rutaProyecto = rutaProyecto;
             this.leerGuardar = leerGuardar;
+            manejador = new ManejadorCodigo();
             InitializeComponent();
             setearComponentes(); //Este se da cuando se ejecuta la primera vez la ventana
             agregarEventos();//Se agregan eventos a los componentes
@@ -266,29 +269,36 @@ namespace Proyecto1
 
         private void crearButton_Click(object sender, EventArgs e)
         {
-            String nombreCodigo = Interaction.InputBox("Ingrese nombre del Codigo Fuente:", "Nombre Codigo Fuente", "").Trim();
-            if (nombreCodigo.Equals(""))
+            if (proyecto==null)
             {
-                MessageBox.Show("No se ha escrito ningun nombre para el nombre codigo", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No se ha seleccionado ningun proyecto", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                if (repeticionNombreCodigo(nombreCodigo))
+                String nombreCodigo = Interaction.InputBox("Ingrese nombre del Codigo Fuente:", "Nombre Codigo Fuente", "").Trim();
+                if (nombreCodigo.Equals(""))
                 {
-                    MessageBox.Show("Ya existe dicho nombre", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se ha escrito ningun nombre para el nombre codigo", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    CodigoFuente codigoFuente = new CodigoFuente(nombreCodigo);
-                    proyecto.agregarCodigoFuente(codigoFuente);
+                    if (repeticionNombreCodigo(nombreCodigo))
+                    {
+                        MessageBox.Show("Ya existe dicho nombre", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        CodigoFuente codigoFuente = new CodigoFuente(nombreCodigo);
+                        proyecto.agregarCodigoFuente(codigoFuente);
 
-                    codigoAbiertoCombo.Items.Add(codigoFuente.getNombreCodigo());
-                    codigoAbiertoCombo.SelectedItem = nombreCodigo;
-                    codigoGuardado = false;
+                        codigoAbiertoCombo.Items.Add(codigoFuente.getNombreCodigo());
+                        codigoAbiertoCombo.SelectedItem = nombreCodigo;
+                        codigoGuardado = false;
 
-                    setearCodigo();
+                        setearCodigo();
+                    }
                 }
-            }
+            }           
         }
 
         /// <summary>
@@ -377,11 +387,6 @@ namespace Proyecto1
             return codigoAbiertoCombo;
         }
 
-        public void setComboCodigoFuentesAbierto(System.Windows.Forms.ComboBox comboCodigos)
-        {
-            this.codigoAbiertoCombo = comboCodigos;
-        }
-
         private void ComboCodigoAbierto_SelectedItemChanged(Object sender, System.EventArgs e)
         {
             setearCodigo();
@@ -390,6 +395,9 @@ namespace Proyecto1
         private void editorCodigoRichText_TextChanged(object sender, EventArgs e)
         {
             proyecto.setearCodigo(codigoAbiertoCombo.Text, editorCodigoRichText.Text);
+            manejador.recibirCodigo(editorCodigoRichText.Text);
+            manejador.ejecutarManejador();
+
         }
 
         private void editorRichTextBox_SelectionChanged(object sender, System.EventArgs e)

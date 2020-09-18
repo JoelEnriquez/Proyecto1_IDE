@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>blue-orange-flames.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationFramework" />
@@ -49,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logica\AnalizadorLexico.cs" />
+    <Compile Include="Logica\Automata.cs" />
+    <Compile Include="Logica\Estado.cs" />
+    <Compile Include="Logica\ManejadorCodigo.cs" />
+    <Compile Include="Logica\Transicion.cs" />
     <Compile Include="ObjetosCodigo\CodigoFuente.cs" />
     <Compile Include="ObjetosCodigo\Proyecto.cs" />
     <Compile Include="Windows\AbrirBorrarCodigo.cs">
@@ -113,6 +120,9 @@
   <ItemGroup>
     <None Include="Resources\importar.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="blue-orange-flames.ico" />
+    <None Include="Resources\Logo.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

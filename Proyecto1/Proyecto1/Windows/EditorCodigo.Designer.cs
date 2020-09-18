@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorCodigo));
             this.menuStripEditorCodigo = new System.Windows.Forms.MenuStrip();
             this.pantallaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +48,7 @@
             this.crearButton = new System.Windows.Forms.Button();
             this.codigoAbiertoCombo = new System.Windows.Forms.ComboBox();
             this.txtNombreProyecto = new System.Windows.Forms.Label();
-            this.importarButton = new System.Windows.Forms.Button();
+            this.exportarButton = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.salidaErroresRichText = new System.Windows.Forms.RichTextBox();
             this.posicionTextBox = new System.Windows.Forms.TextBox();
@@ -244,15 +245,15 @@
             this.txtNombreProyecto.TabIndex = 9;
             this.txtNombreProyecto.Text = "Nombre Proyecto:";
             // 
-            // importarButton
+            // exportarButton
             // 
-            this.importarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importarButton.Location = new System.Drawing.Point(1131, 714);
-            this.importarButton.Name = "importarButton";
-            this.importarButton.Size = new System.Drawing.Size(141, 62);
-            this.importarButton.TabIndex = 12;
-            this.importarButton.Text = "Importar";
-            this.importarButton.UseVisualStyleBackColor = true;
+            this.exportarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exportarButton.Location = new System.Drawing.Point(1131, 714);
+            this.exportarButton.Name = "exportarButton";
+            this.exportarButton.Size = new System.Drawing.Size(141, 62);
+            this.exportarButton.TabIndex = 12;
+            this.exportarButton.Text = "Exportar";
+            this.exportarButton.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -319,12 +320,13 @@
             this.Controls.Add(this.posicionTextBox);
             this.Controls.Add(this.salidaErroresRichText);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.importarButton);
+            this.Controls.Add(this.exportarButton);
             this.Controls.Add(this.txtNombreProyecto);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.editorCodigoRichText);
             this.Controls.Add(this.menuStripEditorCodigo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripEditorCodigo;
             this.Name = "EditorCodigo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -357,7 +359,7 @@
         private System.Windows.Forms.Button crearButton;
         private System.Windows.Forms.ComboBox codigoAbiertoCombo;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button importarButton;
+        private System.Windows.Forms.Button exportarButton;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RichTextBox salidaErroresRichText;
         private System.Windows.Forms.TextBox posicionTextBox;
