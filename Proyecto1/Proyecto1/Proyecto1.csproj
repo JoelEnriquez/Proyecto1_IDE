@@ -53,9 +53,8 @@
   <ItemGroup>
     <Compile Include="Logica\AnalizadorLexico.cs" />
     <Compile Include="Logica\Automata.cs" />
-    <Compile Include="Logica\Estado.cs" />
+    <Compile Include="Logica\EstadoAceptacion.cs" />
     <Compile Include="Logica\ManejadorCodigo.cs" />
-    <Compile Include="Logica\Transicion.cs" />
     <Compile Include="ObjetosCodigo\CodigoFuente.cs" />
     <Compile Include="ObjetosCodigo\Proyecto.cs" />
     <Compile Include="Windows\AbrirBorrarCodigo.cs">

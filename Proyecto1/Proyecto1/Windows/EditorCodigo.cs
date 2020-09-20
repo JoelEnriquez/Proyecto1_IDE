@@ -35,7 +35,7 @@ namespace Proyecto1
             this.proyecto = proyecto;
             this.rutaProyecto = rutaProyecto;
             this.leerGuardar = leerGuardar;
-            manejador = new ManejadorCodigo();
+            manejador = new ManejadorCodigo(this);
             InitializeComponent();
             setearComponentes(); //Este se da cuando se ejecuta la primera vez la ventana
             agregarEventos();//Se agregan eventos a los componentes
@@ -387,6 +387,7 @@ namespace Proyecto1
             return codigoAbiertoCombo;
         }
 
+
         private void ComboCodigoAbierto_SelectedItemChanged(Object sender, System.EventArgs e)
         {
             setearCodigo();
@@ -409,5 +410,18 @@ namespace Proyecto1
 
             posicionTextBox.Text = "Fila:"+fila+ " Columna:" +columna;
         }
+
+
+        public System.Windows.Forms.RichTextBox GetRichTextBox()
+        {
+            return editorCodigoRichText;
+        }
+
+        public void setRichTextBox(System.Windows.Forms.RichTextBox richTextBox)
+        {
+            this.editorCodigoRichText = richTextBox;
+        }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,19 @@ namespace Proyecto1.Logica
     {
         private int[,] tablaTransiciones = new int[17, 22];
         private List<int> estadosAceptacion;
+        private List<EstadoAceptacion> listEstadosAceptacion;
+        private List<String> listadoPalabrasReservadas;
 
         public Automata()
-        {
+        {          
+            estadosAceptacion = new List<int>();
+            listEstadosAceptacion = new List<EstadoAceptacion>();
+            listadoPalabrasReservadas = new List<string>();
             llenarTabla();
             setearTransiciones();
             setearEstadosAceptacion();
-            estadosAceptacion = new List<int>();
+            ingresarCaminos();
+            setearPalabrasReservadas();
         }
 
         private void llenarTabla()
@@ -107,6 +114,25 @@ namespace Proyecto1.Logica
             tablaTransiciones[16, 2] = 5;
         }
 
+        private void setearPalabrasReservadas()
+        {
+            listadoPalabrasReservadas.Add("verdadero");
+            listadoPalabrasReservadas.Add("falso");
+            listadoPalabrasReservadas.Add("entero");
+            listadoPalabrasReservadas.Add("decimal");
+            listadoPalabrasReservadas.Add("cadena");
+            listadoPalabrasReservadas.Add("booleano");
+            listadoPalabrasReservadas.Add("carácter");
+            listadoPalabrasReservadas.Add("SI");
+            listadoPalabrasReservadas.Add("SINO");
+            listadoPalabrasReservadas.Add("SINO_SI");
+            listadoPalabrasReservadas.Add("MIENTRAS");
+            listadoPalabrasReservadas.Add("HACER");
+            listadoPalabrasReservadas.Add("DESDE");
+            listadoPalabrasReservadas.Add("HASTA");
+            listadoPalabrasReservadas.Add("INCREMENTO");
+        }
+
         private void setearEstadosAceptacion()
         {
             estadosAceptacion.Add(1);
@@ -120,16 +146,137 @@ namespace Proyecto1.Logica
             estadosAceptacion.Add(13);
             estadosAceptacion.Add(15);
             estadosAceptacion.Add(16);
-
         }
 
-        public Boolean estadoAceptacion(int estadoActual)
+        private void ingresarCaminos(){
+            listEstadosAceptacion.Add(new EstadoAceptacion(1,"Operador Aritmetico"));//
+            listEstadosAceptacion.Add(new EstadoAceptacion(2, "Entero"));//
+            listEstadosAceptacion.Add(new EstadoAceptacion(4, "Char"));//
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Cadena", "7-3,7-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "10-8,10-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Aritmetico","1-7,1,5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Aritmetico","0-1,0-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Comentario","2-6,3-14,3-16,2-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Aritmetico", "3-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Fin Sentencia", "14-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Signos de agrupacion", "15-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Signos de agrupacion", "16-5"));            
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Logico", "12-9,12-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Logico", "13-10,13-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "8-8,8-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "9-8,9-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "11-8,11-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(6, "Operador Aritmetico"));//
+            listEstadosAceptacion.Add(new EstadoAceptacion(7, "Operador Aritmetico"));//
+            listEstadosAceptacion.Add(new EstadoAceptacion(8, "Operador Relacional","8-8"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(8, "Operador Relacional", "9-8"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(8, "Asignacion","10-8"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(8, "Operador Logico","11-8"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(12, "Palabra"));//
+            listEstadosAceptacion.Add(new EstadoAceptacion(13, "Comentario"));//
+            listEstadosAceptacion.Add(new EstadoAceptacion(15, "Decimal"));//
+        }
+
+        public Color devolverColorPorRuta(String ruta)
+        {
+            for (int i = 0; i < listEstadosAceptacion.Count; i++)
+            {
+                if (listEstadosAceptacion[i].caminoAceptacion!=null)
+                {
+                    if (listEstadosAceptacion[i].caminoAceptacion.Equals(ruta))
+                    {
+                        String tipoToken = listEstadosAceptacion[i].tipoToken;
+                        if (tipoToken.Equals("Operador Relacional") || tipoToken.Equals("Operador Logico") ||
+                            tipoToken.Equals("Signos de agrupacion") || tipoToken.Equals("Operador Aritmetico"))
+                        {
+                            return Color.DarkBlue;
+                        }
+                        else if (tipoToken.Equals("Comentario"))
+                        {
+                            return Color.Red;
+                        }
+                        else if (tipoToken.Equals("Asignacion") || tipoToken.Equals("Fin Sentencia"))
+                        {
+                            return Color.Pink;
+                        }
+                        else if (tipoToken.Equals("Cadena"))
+                        {
+                            return Color.DarkGray;
+                        }
+                    }
+                }
+                
+            }
+            return Color.Transparent;
+        }
+
+        public Color devolverColorPorEstado(int estadoAceptacion, String posiblePalabraReservada)
+        {
+            for (int i = 0; i < listEstadosAceptacion.Count; i++)
+            {
+                if (listEstadosAceptacion[i].numeroEstado==estadoAceptacion)
+                {
+                    if (listEstadosAceptacion[i].tipoToken.Equals("Operador Aritmetico"))
+                    {
+                        return Color.DarkBlue;
+                    }
+                    else if (listEstadosAceptacion[i].tipoToken.Equals("Entero"))
+                    {
+                        return Color.Purple;
+                    }
+                    else if (listEstadosAceptacion[i].tipoToken.Equals("Char"))
+                    {
+                        return Color.Brown;
+                    }
+                    else if (listEstadosAceptacion[i].tipoToken.Equals("Comentario"))
+                    {
+                        return Color.Red;
+                    }
+                    else if (listEstadosAceptacion[i].tipoToken.Equals("Decimal"))
+                    {
+                        return Color.LightBlue;
+                    }
+                    else if (listEstadosAceptacion[i].tipoToken.Equals("Palabra"))
+                    {
+                        //verificar que venga en el listado de palabras aceptadas
+                        if (listadoPalabrasReservadas.Contains(posiblePalabraReservada))
+                        {
+                            if (posiblePalabraReservada.Equals("verdadero") || posiblePalabraReservada.Equals("falso"))
+                            {
+                                return Color.Orange;
+                            }
+                            else if (posiblePalabraReservada.Equals("entero") || posiblePalabraReservada.Equals("decimal") ||
+                                posiblePalabraReservada.Equals("cadena") || posiblePalabraReservada.Equals("booleano") ||
+                                posiblePalabraReservada.Equals("carácter"))                          
+                            {
+                                return Color.Black;
+                            }
+                            else
+                            {
+                                return Color.Green;
+                            }
+                        }
+                        else
+                        {
+                            return Color.Red;
+                        }
+                    }
+                }
+            }
+            return Color.Transparent;
+        }
+
+        public String retornarTipoToken(int estado, String recorrido)
+        {
+            return null;
+        }
+
+        public Boolean esEstadoAceptacion(int estadoActual)
         {
             if (estadosAceptacion.Contains(estadoActual))
             {
                 return true;
             }
-
             return false;
         }
 
@@ -251,9 +398,69 @@ namespace Proyecto1.Logica
             return -1;
         }
 
+        public int comprobarCharOEspacioBlanco(int codigoASCCI)
+        {
+            if ((codigoASCCI >= 33 && codigoASCCI <= 126) || (codigoASCCI >= 128 && codigoASCCI <= 253))
+            {
+                return 18;
+            }
+            else
+            {
+                return 21;
+            }
+        }
+
+        public int comprobarTabEspacioCharOSalto(int codigoASCCI)
+        {
+            if ((codigoASCCI >= 33 && codigoASCCI <= 126) || (codigoASCCI >= 128 && codigoASCCI <= 253))
+            {
+                return 18;
+            }
+            else if (codigoASCCI==9)
+            {
+                return 19;
+            }
+            else if (codigoASCCI==32)
+            {
+                return 20;
+            }
+            else
+            {
+                return 21;
+            }
+        }
+
+        public int comprobarAstericoCharEspacio(int codigoASCCI)
+        {
+            if (codigoASCCI == 42)
+            {
+                return 3;
+            }
+            else if ((codigoASCCI >= 33 && codigoASCCI <= 126) || (codigoASCCI >= 128 && codigoASCCI <= 253))
+            {
+                return 18;
+            }
+            else
+            {
+                return 21;
+            }
+        }
+
+        public int sonComillas(int codigoASCCI)
+        {
+            if (codigoASCCI == 34)
+            {
+                //comillas dobles
+                return 7;
+            }
+            return -1;
+        }
+
         public int retornarTransicion(int fila, int columna)
         {
             return tablaTransiciones[fila, columna];
         }
+
+        
     }
 }

@@ -9,14 +9,26 @@ namespace Proyecto1.Logica
 {
     public class ManejadorCodigo
     {
-        String codigoAnalizar;
-        String codigoAnalizado;
-        AnalizadorLexico analizador;
+        private String codigoAnalizar;
+        private String codigoAnalizado;
+        private AnalizadorLexico analizador;
+        private EditorCodigo editor;
+        private List<String> tokensInvalidos;
+
+        public ManejadorCodigo(EditorCodigo editor)
+        {
+            this.editor = editor;
+            tokensInvalidos = new List<String>();
+        }
 
         public void ejecutarManejador()
         {
+            if (tokensInvalidos!=null)
+            {
+                tokensInvalidos.Clear();
+            }
             byte[] asciiBytes = Encoding.ASCII.GetBytes(codigoAnalizar);
-            analizador = new AnalizadorLexico(asciiBytes);
+            analizador = new AnalizadorLexico(asciiBytes,this,editor);
             analizador.ejecutarAnalizador();
         }
 
@@ -30,31 +42,11 @@ namespace Proyecto1.Logica
             codigoAnalizado += token;
         }
 
-
-
-        public void pruebaCodigo()
+        public void agregarTokenErroneo(String token)
         {
-            byte[] asciiBytes = Encoding.ASCII.GetBytes(codigoAnalizar);
+            tokensInvalidos.Add(token);
+        }
 
-            for (int i = 0; i < asciiBytes.Length; i++)
-            {
-                //Console.WriteLine(asciiBytes[i]);
-                if (asciiBytes[i] == 9)
-                {
-                    //MessageBox.Show("tab", "", MessageBoxButton.OK);
-                    //Console.WriteLine(Char.ConvertToUtf32(codigoAnalizar, i));
-                }
-                else if (asciiBytes[i] == 10)
-                {
-                    //MessageBox.Show("salto de linea", "", MessageBoxButton.OK);
-                }
-                else if (asciiBytes[i] == 32)
-                {
-                    // MessageBox.Show("espacio", "", MessageBoxButton.OK);
-                }
-
-            }
-        } 
         
     }
 }
