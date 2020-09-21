@@ -9,19 +9,19 @@ namespace Proyecto1.Logica
 {
     public class AnalizadorLexico
     {
-        byte[] charAnalizar;
+        private byte[] charAnalizar;
         private ManejadorCodigo manejador;
         private EditorCodigo editor;
         private Automata automata;
-        int estadoActual = 0;
-        int columnaAutomata = 0;
-        int apuntadorTexto = 0;
-        int ultimoEstadoAceptado = 0;
-        String auxTokenAceptado = "";
-        String auxCadenaMomentanea = "";
-        String auxRutaToken = "";
+        private int estadoActual = 0;
+        private int columnaAutomata = 0;
+        private int apuntadorTexto = 0;
+        private String auxTokenAceptado = "";
+        private String auxCadenaMomentanea = "";
+        private String auxRutaToken = "";
+        private String palabraReservadaFalloAux="";
 
-        public AnalizadorLexico(byte[] charAnalizar,ManejadorCodigo manejador,EditorCodigo editor)
+        public AnalizadorLexico(byte[] charAnalizar, ManejadorCodigo manejador, EditorCodigo editor)
         {
             this.charAnalizar = charAnalizar;
             this.manejador = manejador;
@@ -67,20 +67,19 @@ namespace Proyecto1.Logica
                 }
 
                 //Si estamos en el estado 0 y viene un wspace, hacer caso omiso.
-                if (estadoActual == 0 && columnaAutomata==21)
+                if (estadoActual == 0 && columnaAutomata == 21)
                 {
                     estadoActual = 0;
-                    ultimoEstadoAceptado = 0;
                     auxTokenAceptado = "";
                     auxCadenaMomentanea = "";
                     auxRutaToken = "";
                     apuntadorTexto++;
                 }
-                else if(estadoActual==13 && charActual==10){
+                else if (estadoActual == 13 && charActual == 10)
+                {
                     //pasar para analizar el siguiente char, y devolver la cadena valida
                     asignarColor(i, Color.Red);
                     estadoActual = 0;
-                    ultimoEstadoAceptado = 0;
                     auxTokenAceptado = "";
                     auxCadenaMomentanea = "";
                     auxRutaToken = "";
@@ -95,87 +94,103 @@ namespace Proyecto1.Logica
                         //retornar la ultima cadena valida
                         if (automata.esEstadoAceptacion(estadoActual))
                         {
-                            Color color;
-                            if (estadoActual==5||estadoActual==8)
-                            {
-                                color = automata.devolverColorPorRuta(auxRutaToken);
-                            }
-                            else
-                            {
-                                color = automata.devolverColorPorEstado(estadoActual,auxTokenAceptado);
-                            }
-                            asignarColor(i, color);
+                            apuntadorTexto = i;
+                            //Se vuelve a analizar el char entrante
                             i--;
-                        }                        
+                        }
                         else
                         {
                             //si no hay cadena aceptada
-                            if (estadoActual==0)
+                            if (estadoActual == 0)
                             {
                                 //el token erroneo es el entrante
-                                asignarColor(i+1, Color.Red);
+                                manejador.agregarTokenErroneo(Char.ToString((char)charActual));
+                                asignarColor(i + 1, Color.OrangeRed);
                             }
                             else
                             {
-                                if (auxTokenAceptado.Length>0)
-                                {
-                                    Color color;
-                                    if (ultimoEstadoAceptado==5||ultimoEstadoAceptado==8)
-                                    {
-                                        color = automata.devolverColorPorRuta(auxRutaToken);
-                                    }
-                                    else
-                                    {
-                                        color = automata.devolverColorPorEstado(ultimoEstadoAceptado, auxTokenAceptado);
-                                    }
-                                    asignarColor(i - 1, color);
-                                    asignarColor(i, Color.Red);
-                                }
-                                else
-                                {
-                                    asignarColor(i+1,Color.Red);
-                                }
+                                //poner el token erroneo en rojo y se vuelve a analizar la cadena entrante
+                                manejador.agregarTokenErroneo(auxCadenaMomentanea.Substring(auxTokenAceptado.Length));
+                                apuntadorTexto = i - 1;
+                                asignarColor(i, Color.OrangeRed);
+
+                                apuntadorTexto = i;
+                                i--;//Volver a analizar el token entrante   
                             }
                         }
                         estadoActual = 0;
-                        ultimoEstadoAceptado = 0;
                         auxTokenAceptado = "";
                         auxCadenaMomentanea = "";
                         auxRutaToken = "";
+                        palabraReservadaFalloAux = "";
                     }
                     else
                     {
                         String cadenaTransicion = Char.ToString((char)charActual);
 
-                        //concatenar la cadena momentanea y proseguir al siguiente
-                        auxCadenaMomentanea += cadenaTransicion;
-                        if (automata.esEstadoAceptacion(transicion))
-                        {
-                            auxTokenAceptado = auxCadenaMomentanea;
-                            ultimoEstadoAceptado = transicion;
-                        }
-
+                        //Ruta del token para obtener luego el color si se llega a un estado de aceptacion
                         if (estadoActual == 0)
                         {
                             auxRutaToken = columnaAutomata + "-" + transicion;
                         }
                         else
                         {
-                            if (estadoActual!=transicion)
+                            if (estadoActual != transicion)
                             {
                                 auxRutaToken += "," + columnaAutomata + "-" + transicion;
-                            }                           
+                            }
+                        }
+
+                        //concatenar la cadena momentanea y proseguir al siguiente
+                        auxCadenaMomentanea += cadenaTransicion;
+                        if (automata.esEstadoAceptacion(transicion))
+                        {
+                            auxTokenAceptado = auxCadenaMomentanea;
+
+                            //pintar el token valido
+                            Color color;
+                            if (transicion == 5 || transicion == 8)
+                            {
+                                color = automata.devolverColorPorRuta(auxRutaToken);
+                            }
+                            else
+                            {
+                                color = automata.devolverColorPorEstado(transicion, auxTokenAceptado);
+                                //es palabra reservada erronea
+                                if (color == Color.OrangeRed)
+                                {
+                                    //nos asegurmos que no se repita la palabra reservada erronea
+                                    if (!palabraReservadaFalloAux.Equals(""))
+                                    {
+                                        manejador.eliminarPalabraInicialRepetida(palabraReservadaFalloAux);
+                                        
+                                    }
+                                    manejador.agregarTokenErroneo(auxTokenAceptado);
+                                    palabraReservadaFalloAux = auxTokenAceptado;
+                                }
+                            }
+                            asignarColor(i + 1, color);
                         }
 
                         //Para el siguiente char, nos pasamos al siguiente estado
                         estadoActual = transicion;
                     }
                 }
-
-
             }
 
-            //verificamos si terminamos en un estado de aceptacion, sino se devuelve la parte erronea.
+            ////se verifica si hay una cadena aux restante, de ser asi, es porque no esta en un estado de aceptacion
+            //if (auxCadenaMomentanea.Length>0 && apuntadorTexto==0 && auxTokenAceptado.Length==0)
+            //{
+            //    asignarColor(auxCadenaMomentanea.Length, Color.OrangeRed);
+            //}
+
+            if (!automata.esEstadoAceptacion(estadoActual))
+            {
+                apuntadorTexto = charAnalizar.Length - (auxCadenaMomentanea.Length-auxTokenAceptado.Length);
+                asignarColor(charAnalizar.Length,Color.OrangeRed);
+
+                manejador.agregarTokenErroneo(auxCadenaMomentanea.Substring(auxTokenAceptado.Length));
+            }
         }
 
         public void asignarColor(int indiceCiclo, Color colorTexto)
@@ -183,14 +198,13 @@ namespace Proyecto1.Logica
             System.Windows.Forms.RichTextBox ingresoCodigoRich = editor.GetRichTextBox();
             int index = ingresoCodigoRich.SelectionStart;
 
-            ingresoCodigoRich.Select(apuntadorTexto,indiceCiclo);
+            ingresoCodigoRich.Select(apuntadorTexto, indiceCiclo);
             ingresoCodigoRich.SelectionColor = colorTexto;
 
+            //Volver a deseleccionar el texto que ya esta pintado
             ingresoCodigoRich.SelectionStart = index;
             ingresoCodigoRich.SelectionLength = 0;
             editor.setRichTextBox(ingresoCodigoRich);
-
-            apuntadorTexto = indiceCiclo;
         }
     }
 }

@@ -54,7 +54,8 @@
             this.posicionTextBox = new System.Windows.Forms.TextBox();
             this.nombreProyectoTextBox = new System.Windows.Forms.TextBox();
             this.compilarButton = new System.Windows.Forms.Button();
-            this.openFile = new System.Windows.Forms.OpenFileDialog();
+            this.openProyecto = new System.Windows.Forms.OpenFileDialog();
+            this.saveErrorFiles = new System.Windows.Forms.SaveFileDialog();
             this.menuStripEditorCodigo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +69,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStripEditorCodigo.Location = new System.Drawing.Point(0, 0);
             this.menuStripEditorCodigo.Name = "menuStripEditorCodigo";
-            this.menuStripEditorCodigo.Size = new System.Drawing.Size(1383, 28);
+            this.menuStripEditorCodigo.Size = new System.Drawing.Size(1383, 30);
             this.menuStripEditorCodigo.TabIndex = 0;
             this.menuStripEditorCodigo.Text = "menuStrip1";
             // 
@@ -78,7 +79,7 @@
             this.abrirToolStripMenuItem,
             this.volverMenuToolStripMenuItem});
             this.pantallaToolStripMenuItem.Name = "pantallaToolStripMenuItem";
-            this.pantallaToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.pantallaToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
             this.pantallaToolStripMenuItem.Text = "Pantalla";
             this.pantallaToolStripMenuItem.Click += new System.EventHandler(this.pantallaToolStripMenuItem_Click);
             // 
@@ -103,7 +104,7 @@
             this.cerrarToolStripMenuItem,
             this.eliminarToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
             this.archivoToolStripMenuItem.Text = "Proyecto";
             this.archivoToolStripMenuItem.Click += new System.EventHandler(this.archivoToolStripMenuItem_Click);
             // 
@@ -133,7 +134,7 @@
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verLaAyudaToolStripMenuItem});
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(65, 26);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             // 
             // verLaAyudaToolStripMenuItem
@@ -254,6 +255,7 @@
             this.exportarButton.TabIndex = 12;
             this.exportarButton.Text = "Exportar";
             this.exportarButton.UseVisualStyleBackColor = true;
+            this.exportarButton.Click += new System.EventHandler(this.exportarButton_Click);
             // 
             // label8
             // 
@@ -268,6 +270,7 @@
             // salidaErroresRichText
             // 
             this.salidaErroresRichText.BackColor = System.Drawing.Color.Silver;
+            this.salidaErroresRichText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.salidaErroresRichText.Location = new System.Drawing.Point(24, 618);
             this.salidaErroresRichText.Name = "salidaErroresRichText";
             this.salidaErroresRichText.ReadOnly = true;
@@ -305,10 +308,15 @@
             this.compilarButton.TabIndex = 17;
             this.compilarButton.Text = "Compilar";
             this.compilarButton.UseVisualStyleBackColor = true;
+            this.compilarButton.Click += new System.EventHandler(this.compilarButton_Click);
             // 
-            // openFile
+            // openProyecto
             // 
-            this.openFile.Filter = "Archivos de Proyecto(*.gt)|*.gt*";
+            this.openProyecto.Filter = "Archivos de Proyecto(*.gt)|*.gt*";
+            // 
+            // saveErrorFiles
+            // 
+            this.saveErrorFiles.Filter = "Archivos de Error(*.gtE)|*.gtE*";
             // 
             // EditorCodigo
             // 
@@ -368,6 +376,7 @@
         private System.Windows.Forms.ToolStripMenuItem pantallaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem volverMenuToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog openFile;
+        private System.Windows.Forms.OpenFileDialog openProyecto;
+        private System.Windows.Forms.SaveFileDialog saveErrorFiles;
     }
 }

@@ -153,8 +153,11 @@ namespace Proyecto1.Logica
             listEstadosAceptacion.Add(new EstadoAceptacion(2, "Entero"));//
             listEstadosAceptacion.Add(new EstadoAceptacion(4, "Char"));//
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Cadena", "7-3,7-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "8-8,10-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "9-8,10-5"));
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "10-8,10-5"));
-            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Aritmetico","1-7,1,5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "11-8,10-5"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Aritmetico","1-7,1-5"));
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Aritmetico","0-1,0-5"));
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Comentario","2-6,3-14,3-16,2-5"));
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Aritmetico", "3-5"));
@@ -163,13 +166,10 @@ namespace Proyecto1.Logica
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Signos de agrupacion", "16-5"));            
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Logico", "12-9,12-5"));
             listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Logico", "13-10,13-5"));
-            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "8-8,8-5"));
-            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "9-8,9-5"));
-            listEstadosAceptacion.Add(new EstadoAceptacion(5, "Operador Relacional", "11-8,11-5"));
             listEstadosAceptacion.Add(new EstadoAceptacion(6, "Operador Aritmetico"));//
             listEstadosAceptacion.Add(new EstadoAceptacion(7, "Operador Aritmetico"));//
             listEstadosAceptacion.Add(new EstadoAceptacion(8, "Operador Relacional","8-8"));
-            listEstadosAceptacion.Add(new EstadoAceptacion(8, "Operador Relacional", "9-8"));
+            listEstadosAceptacion.Add(new EstadoAceptacion(8, "Operador Relacional","9-8"));
             listEstadosAceptacion.Add(new EstadoAceptacion(8, "Asignacion","10-8"));
             listEstadosAceptacion.Add(new EstadoAceptacion(8, "Operador Logico","11-8"));
             listEstadosAceptacion.Add(new EstadoAceptacion(12, "Palabra"));//
@@ -258,7 +258,7 @@ namespace Proyecto1.Logica
                         }
                         else
                         {
-                            return Color.Red;
+                            return Color.OrangeRed;
                         }
                     }
                 }

@@ -176,9 +176,9 @@ namespace Proyecto1
                 preguntarGuardarProyecto();
             }
 
-            if (openFile.ShowDialog() == DialogResult.OK)
+            if (openProyecto.ShowDialog() == DialogResult.OK)
             {
-                rutaProyecto = openFile.FileName;
+                rutaProyecto = openProyecto.FileName;
                 proyecto = leerGuardar.leerProyecto(rutaProyecto);
                 reSetearComponentes(); //Se vuelven a pintar los componentes con el archivo que se habra   
                 codigoGuardado = true;
@@ -422,6 +422,26 @@ namespace Proyecto1
             this.editorCodigoRichText = richTextBox;
         }
 
-        
+        private void compilarButton_Click(object sender, EventArgs e)
+        {
+            if (manejador.obtenerTokensInvalidos().Count>0)
+            {
+                salidaErroresRichText.Clear();
+
+                List<String> tokensInvalidos = manejador.obtenerTokensInvalidos();
+                for (int i = 0; i < tokensInvalidos.Count; i++)
+                {
+                    salidaErroresRichText.AppendText(tokensInvalidos[i] + "\n");
+                }
+            }
+        }
+
+        private void exportarButton_Click(object sender, EventArgs e)
+        {
+            if (salidaErroresRichText.Text.Length>0)
+            {
+                saveErrorFiles
+            }
+        }
     }
 }

@@ -37,14 +37,26 @@ namespace Proyecto1.Logica
             this.codigoAnalizar = codigoAnalizar;
         }
 
-        public void agregarCodigo(String token)
-        {
-            codigoAnalizado += token;
-        }
-
         public void agregarTokenErroneo(String token)
         {
-            tokensInvalidos.Add(token);
+            if (!token.Equals(""))
+            {
+                char posibleEspacioBlanco = token[0];
+                if ((int)posibleEspacioBlanco != 9 && (int)posibleEspacioBlanco != 10 && (int)posibleEspacioBlanco != 32)
+                {
+                    tokensInvalidos.Add(token);
+                }
+            }    
+        }
+
+        public void eliminarPalabraInicialRepetida(String palabraAnterior)
+        {
+            tokensInvalidos.Remove(palabraAnterior);
+        }
+
+        public List<String> obtenerTokensInvalidos()
+        {
+            return tokensInvalidos;
         }
 
         
