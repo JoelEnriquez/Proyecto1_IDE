@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -424,15 +425,18 @@ namespace Proyecto1
 
         private void compilarButton_Click(object sender, EventArgs e)
         {
-            if (manejador.obtenerTokensInvalidos().Count>0)
+            if (editorCodigoRichText.Text.Length>0 && proyecto!=null)
             {
                 salidaErroresRichText.Clear();
 
-                List<String> tokensInvalidos = manejador.obtenerTokensInvalidos();
-                for (int i = 0; i < tokensInvalidos.Count; i++)
+                if (editorCodigoRichText.Text.Length>0)
                 {
-                    salidaErroresRichText.AppendText(tokensInvalidos[i] + "\n");
-                }
+                    List<String> tokensInvalidos = manejador.obtenerTokensInvalidos();
+                    for (int i = 0; i < tokensInvalidos.Count; i++)
+                    {
+                        salidaErroresRichText.AppendText(tokensInvalidos[i] + "\n");
+                    }
+                } 
             }
         }
 
@@ -440,8 +444,24 @@ namespace Proyecto1
         {
             if (salidaErroresRichText.Text.Length>0)
             {
-                saveErrorFiles
+                if (saveErrorFiles.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter writerError = new StreamWriter(File.Create(saveErrorFiles.FileName+".gtE")))
+                    {
+                        writerError.WriteLine(salidaErroresRichText.Text);
+                    }
+                }
             }
+        }
+
+        private void verLaAyudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Crea archivos de codigo y teclea tu codigo a tu antojo para escribir" +
+                "el programa que quieras diseñar. Si hay fallos lexicos en tu codigo" +
+                "el editor te los hará saber, marcandotelos con un rojo naranjo." +
+                "Puedes exportar tus fallos, para aprender de tus errores, y ya no volver a " +
+                "hacerlos. El listado de palabras reservadas, se encuentra en el manual" +
+                "de usuario. Buena suerte!","Ayuda",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
     }
 }

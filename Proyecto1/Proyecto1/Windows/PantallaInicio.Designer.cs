@@ -94,7 +94,7 @@
             // 
             // openFile
             // 
-            this.openFile.Filter = "Archivos de Proyecto(*.gt)|*.gt*";
+            this.openFile.Filter = "Archivos de Proyecto(*.gt)|*.gt";
             // 
             // saveFile
             // 
