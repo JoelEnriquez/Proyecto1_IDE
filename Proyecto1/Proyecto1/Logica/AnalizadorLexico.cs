@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Proyecto1.Logica
 {
@@ -19,13 +20,15 @@ namespace Proyecto1.Logica
         private String auxTokenAceptado = "";
         private String auxCadenaMomentanea = "";
         private String auxRutaToken = "";
-        private String palabraReservadaFalloAux="";
+        private String palabraReservadaFalloAux = "";
+        private RichTextBox ingresoCodigoRich;
 
         public AnalizadorLexico(byte[] charAnalizar, ManejadorCodigo manejador, EditorCodigo editor)
         {
             this.charAnalizar = charAnalizar;
             this.manejador = manejador;
             this.editor = editor;
+            this.ingresoCodigoRich = editor.GetRichTextBox();
             automata = new Automata();
         }
 
@@ -163,7 +166,7 @@ namespace Proyecto1.Logica
                                     if (!palabraReservadaFalloAux.Equals(""))
                                     {
                                         manejador.eliminarPalabraInicialRepetida(palabraReservadaFalloAux);
-                                        
+
                                     }
                                     manejador.agregarTokenErroneo(auxTokenAceptado);
                                     palabraReservadaFalloAux = auxTokenAceptado;
@@ -179,15 +182,11 @@ namespace Proyecto1.Logica
             }
 
             ////se verifica si hay una cadena aux restante, de ser asi, es porque no esta en un estado de aceptacion
-            //if (auxCadenaMomentanea.Length>0 && apuntadorTexto==0 && auxTokenAceptado.Length==0)
-            //{
-            //    asignarColor(auxCadenaMomentanea.Length, Color.OrangeRed);
-            //}
 
             if (!automata.esEstadoAceptacion(estadoActual))
             {
-                apuntadorTexto = charAnalizar.Length - (auxCadenaMomentanea.Length-auxTokenAceptado.Length);
-                asignarColor(charAnalizar.Length,Color.OrangeRed);
+                apuntadorTexto = charAnalizar.Length - (auxCadenaMomentanea.Length - auxTokenAceptado.Length);
+                asignarColor(charAnalizar.Length, Color.OrangeRed);
 
                 manejador.agregarTokenErroneo(auxCadenaMomentanea.Substring(auxTokenAceptado.Length));
             }
@@ -195,7 +194,6 @@ namespace Proyecto1.Logica
 
         public void asignarColor(int indiceCiclo, Color colorTexto)
         {
-            System.Windows.Forms.RichTextBox ingresoCodigoRich = editor.GetRichTextBox();
             int index = ingresoCodigoRich.SelectionStart;
 
             ingresoCodigoRich.Select(apuntadorTexto, indiceCiclo);
@@ -204,10 +202,6 @@ namespace Proyecto1.Logica
             //Volver a deseleccionar el texto que ya esta pintado
             ingresoCodigoRich.SelectionStart = index;
             ingresoCodigoRich.SelectionLength = 0;
-            editor.setRichTextBox(ingresoCodigoRich);
         }
     }
 }
-/* Lo primero es buscar que tipo de char es con su columna
- * segundo buscar su transicion
- */

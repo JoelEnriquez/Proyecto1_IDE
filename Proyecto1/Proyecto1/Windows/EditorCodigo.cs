@@ -124,22 +124,7 @@ namespace Proyecto1
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
         {
 
         }
@@ -235,10 +220,6 @@ namespace Proyecto1
 
         }
 
-
-
-
-
         private void guardarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             codigoGuardado = true;
@@ -261,11 +242,6 @@ namespace Proyecto1
             {
                 MessageBox.Show("No hay proyecto para eliminar", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void textChangedEventHandler(object sender, TextChangedEventArgs args)
-        {
-
         }
 
         private void crearButton_Click(object sender, EventArgs e)

@@ -266,11 +266,6 @@ namespace Proyecto1.Logica
             return Color.Transparent;
         }
 
-        public String retornarTipoToken(int estado, String recorrido)
-        {
-            return null;
-        }
-
         public Boolean esEstadoAceptacion(int estadoActual)
         {
             if (estadosAceptacion.Contains(estadoActual))

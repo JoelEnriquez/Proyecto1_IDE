@@ -10,7 +10,6 @@ namespace Proyecto1.Logica
     public class ManejadorCodigo
     {
         private String codigoAnalizar;
-        private String codigoAnalizado;
         private AnalizadorLexico analizador;
         private EditorCodigo editor;
         private List<String> tokensInvalidos;
